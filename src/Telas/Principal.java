@@ -1,11 +1,17 @@
 package Telas;
 
+import RegraNegocio.CarregamentoRN;
+
 public class Principal extends javax.swing.JFrame {
 
+    private CarregamentoRN carregamentoRN;
     
 
     public Principal() {
         initComponents();
+        carregamentoRN = new CarregamentoRN();
+        jTcarregado.setModel(carregamentoRN.getCarregadoModel());
+        jTcarregar.setModel(carregamentoRN.getCarregarModel());
     }
 
     @SuppressWarnings("unchecked")
@@ -16,13 +22,13 @@ public class Principal extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTcarregamento = new javax.swing.JTable();
+        jTcarregar = new javax.swing.JTable();
         jBAlterarCarregamento = new javax.swing.JButton();
         jBAtualizar = new javax.swing.JButton();
         jBExcluirCarregamento = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTcarregado = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jTFplaca = new javax.swing.JFormattedTextField();
         jCBveiculo = new javax.swing.JComboBox();
@@ -73,11 +79,11 @@ public class Principal extends javax.swing.JFrame {
         jPanel5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.white, null, null));
         jPanel5.setOpaque(false);
 
-        jTcarregamento.setAutoCreateRowSorter(true);
-        jTcarregamento.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jTcarregamento.setDoubleBuffered(true);
-        jTcarregamento.setDragEnabled(true);
-        jScrollPane1.setViewportView(jTcarregamento);
+        jTcarregar.setAutoCreateRowSorter(true);
+        jTcarregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jTcarregar.setDoubleBuffered(true);
+        jTcarregar.setDragEnabled(true);
+        jScrollPane1.setViewportView(jTcarregar);
 
         jBAlterarCarregamento.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jBAlterarCarregamento.setText("Alterar Carregamento");
@@ -136,7 +142,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.white, null, null));
         jPanel6.setOpaque(false);
 
-        jScrollPane4.setViewportView(jTable1);
+        jScrollPane4.setViewportView(jTcarregado);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -526,8 +532,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField jTFtransportadora;
     private javax.swing.JTextField jTTotalCarregado;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTcarregamento;
+    private javax.swing.JTable jTcarregado;
+    private javax.swing.JTable jTcarregar;
     // End of variables declaration//GEN-END:variables
 
     

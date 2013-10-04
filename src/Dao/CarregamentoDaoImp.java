@@ -2,6 +2,7 @@ package Dao;
 
 import Model.Carregamento;
 import Util.HibernateUtil;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -96,5 +97,15 @@ public class CarregamentoDaoImp implements CarregamentoDao {
         } finally {
             session.close();
         }
+    }
+
+    @Override
+    public List<Carregamento> listarCarregarDia(Date dataAtual) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Carregamento> listarCarregadoDia(Date dataAtual) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

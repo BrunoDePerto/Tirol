@@ -1,17 +1,52 @@
 package Telas;
 
+import Model.Carregamento;
 import RegraNegocio.CarregamentoRN;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import org.hibernate.HibernateException;
 
 public class Principal extends javax.swing.JFrame {
 
     private CarregamentoRN carregamentoRN;
-    
 
     public Principal() {
         initComponents();
         carregamentoRN = new CarregamentoRN();
         jTcarregado.setModel(carregamentoRN.getCarregadoModel());
         jTcarregar.setModel(carregamentoRN.getCarregarModel());
+    }
+
+    private String[][] getValoresTela() {
+        String[][] valores = carregamentoRN.getValoresTela();
+        valores[0][1] = jTFdata.getText(); //DATA
+        valores[1][1] = jCBhorario.getSelectedItem().toString(); //HORA
+        valores[2][1] = jTFtransportadora.getText(); //TRANSPORTADORA
+        valores[3][1] = jTFmotorista.getText(); //MOTORISTA
+        valores[4][1] = jTFplaca.getText(); //PLACA
+        valores[5][1] = jCBveiculo.getSelectedItem().toString(); //VEICULO
+        return valores;
+    }
+
+    private void setValoresTela() {
+        String[][] valores = carregamentoRN.getValoresTela();
+        jTFdata.setText(valores[0][1]); //DATA
+        jCBhorario.setSelectedItem(valores[1][1]); //HORA
+        jTFtransportadora.setText(valores[1][1]); //TRANSPORTADORA
+        jTFmotorista.setText(valores[1][1]); //MOTORISTA
+        jTFplaca.setText(valores[1][1]); //PLACA
+        jCBveiculo.setSelectedItem(valores[1][1]); //VEICULO
+    }
+
+    private void limparValoresTela() {
+        jTFdata.setText(carregamentoRN.getDataControle().toString()); //DATA
+        jCBhorario.setSelectedIndex(0); //HORA
+        jTFtransportadora.setText(""); //TRANSPORTADORA
+        jTFmotorista.setText(""); //MOTORISTA
+        jTFplaca.setText(""); //PLACA
+        jCBveiculo.setSelectedIndex(0); //VEICULO
     }
 
     @SuppressWarnings("unchecked")
@@ -432,7 +467,6 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCBveiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBveiculoActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_jCBveiculoActionPerformed
 
     private void jTFmotoristaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFmotoristaActionPerformed
@@ -442,45 +476,42 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jCBhorarioActionPerformed
 
     private void jBIncluirCarregamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBIncluirCarregamentoActionPerformed
-                
+        try {
+            carregamentoRN.salvar(getValoresTela());
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao converter a data ou a hora" + ex.getMessage());
+        } catch (HibernateException he) {
+            JOptionPane.showMessageDialog(null, "Erro ao gravar carregamento" + he.getMessage());
+        }
     }//GEN-LAST:event_jBIncluirCarregamentoActionPerformed
 
     private void jBSalvarAlteracoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarAlteracoesActionPerformed
-        
     }//GEN-LAST:event_jBSalvarAlteracoesActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jBVolta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVolta1ActionPerformed
-        
     }//GEN-LAST:event_jBVolta1ActionPerformed
 
     private void jBAvanca1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAvanca1ActionPerformed
-       
     }//GEN-LAST:event_jBAvanca1ActionPerformed
 
     private void jBExcluirCarregamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirCarregamentoActionPerformed
-        
     }//GEN-LAST:event_jBExcluirCarregamentoActionPerformed
 
     private void jBAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAtualizarActionPerformed
-        
     }//GEN-LAST:event_jBAtualizarActionPerformed
 
     private void jBAlterarCarregamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAlterarCarregamentoActionPerformed
-        
     }//GEN-LAST:event_jBAlterarCarregamentoActionPerformed
 
-        public static void main(String args[]) {
+    public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
-
             @Override
             public void run() {
                 new Principal().setVisible(true);
@@ -535,6 +566,4 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTable jTcarregado;
     private javax.swing.JTable jTcarregar;
     // End of variables declaration//GEN-END:variables
-
-    
 }

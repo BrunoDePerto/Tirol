@@ -36,4 +36,8 @@ public class VeiculoRN {
     public Veiculo getVeiculo(int idVeiculo) {
         return veiculoDao.getVeiculo(idVeiculo);
     }
+    
+    public Veiculo getVeiculoNome(String nome){
+        return veiculoDao.getVeiculoNome(nome);
+    }
 }

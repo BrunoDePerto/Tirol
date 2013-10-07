@@ -4,6 +4,7 @@ import Model.Veiculo;
 import Util.HibernateUtil;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -21,9 +22,9 @@ public class VeiculoDaoImp implements VeiculoDao {
         try {
             session.save(veiculo);
             t.commit();
-        } catch (Exception e) {
+        } catch (HibernateException e) {
             t.rollback();
-            System.out.println("Erro ao gravar veiculo: " + e.getMessage());
+            throw new HibernateException("Erro ao gravar veiculo", e);
         } finally {
             session.close();
         }
@@ -36,9 +37,9 @@ public class VeiculoDaoImp implements VeiculoDao {
         try {
             session.update(veiculo);
             t.commit();
-        } catch (Exception e) {
+        } catch (HibernateException e) {
             t.rollback();
-            System.out.println("Erro ao alterar veiculo: " + e.getMessage());
+            throw new HibernateException("Erro ao alterar veiculo", e);
         } finally {
             session.close();
         }
@@ -51,9 +52,9 @@ public class VeiculoDaoImp implements VeiculoDao {
         try {
             session.delete(veiculo);
             t.commit();
-        } catch (Exception e) {
+        } catch (HibernateException e) {
             t.rollback();
-            System.out.println("Erro ao apagar veiculo: " + e.getMessage());
+            throw new HibernateException("Erro ao apagar veiculo", e);
         } finally {
             session.close();
         }
@@ -69,10 +70,9 @@ public class VeiculoDaoImp implements VeiculoDao {
             veiculos = criteria.list();
             t.commit();
             return veiculos;
-        } catch (Exception e) {
+        } catch (HibernateException e) {
             t.rollback();
-            System.out.println("Erro ao listar veiculo: " + e.getMessage());
-            return null;
+            throw new HibernateException("Erro ao listar veiculo", e);
         } finally {
             session.close();
         }
@@ -89,10 +89,28 @@ public class VeiculoDaoImp implements VeiculoDao {
             veiculo = (Veiculo) criteria.uniqueResult();
             t.commit();
             return veiculo;
-        } catch (Exception e) {
+        } catch (HibernateException e) {
             t.rollback();
-            System.out.println("Erro ao listar veiculo: " + e.getMessage());
-            return null;
+            throw new HibernateException("Erro ao listar veiculo", e);
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public Veiculo getVeiculoNome(String nome) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        Veiculo veiculo;
+        try {
+            Criteria criteria = session.createCriteria(Veiculo.class);
+            criteria.add(Restrictions.eq("nome", nome));
+            veiculo = (Veiculo) criteria.uniqueResult();
+            t.commit();
+            return veiculo;
+        } catch (HibernateException e) {
+            t.rollback();
+            throw new HibernateException("Erro ao listar veiculo", e);
         } finally {
             session.close();
         }

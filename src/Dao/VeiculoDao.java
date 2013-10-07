@@ -18,4 +18,6 @@ public interface VeiculoDao {
     public List<Veiculo> listar();
 
     public Veiculo getVeiculo(int idVeiculo);
+    
+    public Veiculo getVeiculoNome(String nome);
 }

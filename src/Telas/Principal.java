@@ -1,10 +1,7 @@
 package Telas;
 
-import Model.Carregamento;
 import RegraNegocio.CarregamentoRN;
 import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.hibernate.HibernateException;
 
@@ -17,6 +14,7 @@ public class Principal extends javax.swing.JFrame {
         carregamentoRN = new CarregamentoRN();
         jTcarregado.setModel(carregamentoRN.getCarregadoModel());
         jTcarregar.setModel(carregamentoRN.getCarregarModel());
+        jTFdata.setText(carregamentoRN.getDataControleString());
     }
 
     private String[][] getValoresTela() {
@@ -41,7 +39,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     private void limparValoresTela() {
-        jTFdata.setText(carregamentoRN.getDataControle().toString()); //DATA
+        jTFdata.setText(carregamentoRN.getDataControleString().toString()); //DATA
         jCBhorario.setSelectedIndex(0); //HORA
         jTFtransportadora.setText(""); //TRANSPORTADORA
         jTFmotorista.setText(""); //MOTORISTA

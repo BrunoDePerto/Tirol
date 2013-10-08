@@ -9,7 +9,6 @@ import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.List;
 import javax.swing.table.TableModel;
-import javax.swing.text.Caret;
 import org.hibernate.HibernateException;
 
 /**
@@ -92,8 +91,10 @@ public class CarregamentoRN {
         this.valoresTela = valoresTela;
     }
 
-    public GregorianCalendar getDataControle() {
-
-        return dataControle;
+    public String getDataControleString() {
+        String dataTemp = new SimpleDateFormat("dd/MM/yyyy").format(dataControle.getTime());
+        return dataTemp;
     }
+    
+    
 }

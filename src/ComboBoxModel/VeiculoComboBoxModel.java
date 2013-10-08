@@ -49,25 +49,25 @@ public class VeiculoComboBoxModel extends AbstractListModel implements MutableCo
 
     @Override
     public Object getSelectedItem() {
-        //Retornar o elemento selecionado
+        //Retornar o veiculo selecionado
         return selectedItem;
     }
 
     public Integer getSelectedIndex() {
-        //Retorna o indice do elemento selecionado
+        //Retorna o indice do veiculo selecionado
         int index = veiculos.indexOf(this.getSelectedItem());
         return index;
     }
 
     @Override
     public void setSelectedItem(Object anItem) {
-        //Seta o elemento selecionado
+        //Seta o veicuo selecionado
         selectedItem = anItem;
         fireContentsChanged(this, -1, veiculos.size());
     }
 
     public void setElementAt(Object veiculo, int index) {
-        //Seta o elemento selecionado na posição indice
+        //Seta o veiculo selecionado na posição indice
         veiculos.set(index, (Veiculo) veiculo);
         int length = getSize();
         fireIntervalAdded(this, length - 1, length - 1);
@@ -75,6 +75,7 @@ public class VeiculoComboBoxModel extends AbstractListModel implements MutableCo
 
     @Override
     public void addElement(Object veiculo) {
+        //Adiciona um veiculo no final da lista
         this.veiculos.add((Veiculo) veiculo);
         int length = getSize();
         fireIntervalAdded(this, length - 1, length - 1);
@@ -88,16 +89,18 @@ public class VeiculoComboBoxModel extends AbstractListModel implements MutableCo
 
     @Override
     public void removeElement(Object veiculo) {
+        //Remove o veiculo recebido por parametro
         int index = veiculos.indexOf(veiculo);
         if (index != -1) {
-            // Remove an element  
-            veiculos.remove(veiculo);
-            // Removed from middle, notify ListDataListener objects  
+            // Remove o veiculo 
+            veiculos.remove((Veiculo)veiculo);
+            // Atualiza o combobox  
             fireIntervalRemoved(this, index, index);
         }
     }
 
     public void removeAllItens() {
+        //Remove todos os veiculos
         if (veiculos != null && veiculos.size() > 0) {
             veiculos.clear();
             fireContentsChanged(this, -1, veiculos.size());
@@ -106,6 +109,7 @@ public class VeiculoComboBoxModel extends AbstractListModel implements MutableCo
 
     @Override
     public void removeElementAt(int index) {
+        //Remove o veiculo da posição indice
         if (getSize() >= index) {
             // Remove an element at the specified position  
             veiculos.remove(index);
